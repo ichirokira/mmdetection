@@ -352,7 +352,7 @@ class MlpMixer(nn.Module):
                               stride=patch_size)
 
         #self.head = nn.Linear(config.hidden_dim, num_classes, bias=True)
-        self.head = nn.Conv2d(hidden_dim, 1, kernel_size=(1,1), bias=True)
+        self.head = nn.Linear(hidden_dim, 1, bias=True)
         self.pre_head_ln = nn.LayerNorm(hidden_dim, eps=1e-6)
 
 
@@ -400,6 +400,7 @@ class LP_Modules(nn.Module):
         B,C, H, W = x1.shape
 
         self.kernel = self.mlp(x1)
+        self.kernel = self.kernel.view(1, 1, 1, 1, -1)
         x1 = blockify(x1, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
         x2 = blockify(x2, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
 
