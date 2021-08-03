@@ -154,8 +154,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=3,
-    workers_per_gpu=3,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         type='CocoDatasetLP',
         ann_file='annotations/instances_train2017.json',
