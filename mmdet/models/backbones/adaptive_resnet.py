@@ -386,7 +386,7 @@ class LP_Modules(nn.Module):
 
         super(LP_Modules, self).__init__()
         self.patch_size = patch_size
-        self.mlp = MlpMixer(image_sizes, hidden_dim, tokens_mlp_dim, channels_mlp_dim, num_blocks, zero_head)
+        self.mlp = MlpMixer(image_sizes, hidden_dim, tokens_mlp_dim, channels_mlp_dim, num_blocks, patch_size,zero_head)
     def forward(self, x1, x2):
         """
 
@@ -467,7 +467,7 @@ class AdaptiveResNet(BaseModule):
 
     def __init__(self,
                  depth,
-                 img_scale=(960,960),
+                 img_scale=960,
                  adaptive_kernel=16,
                  hidden_dim=768,
                  tokens_mlp_dim=384,
