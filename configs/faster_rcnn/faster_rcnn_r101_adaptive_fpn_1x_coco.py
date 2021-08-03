@@ -235,7 +235,7 @@ data = dict(
 evaluation = dict(interval=5, metric='bbox')
 
 optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
-optimizer_config = dict(grad_clip=None)
+optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
 # learning policy
 lr_config = dict(
     policy='step',
@@ -259,9 +259,9 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = '../faster_rcnn_r101_fpn_1x_coco_20200130-f513f705.pth'
 resume_from = None
 workflow = [('train', 1)]
-work_dir = './Adaptive_result'
+work_dir = './Adaptive_coco_result'
 seed = 0
 gpu_ids = range(0, 1)
