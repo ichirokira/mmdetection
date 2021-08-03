@@ -400,7 +400,7 @@ class LP_Modules(nn.Module):
         B,C, H, W = x1.shape
 
         self.kernel = self.mlp(x1)
-        self.kernel = self.kernel.view(1, 1, 1, 1, -1)
+        self.kernel = self.kernel.view(B, 1, 1, 1, -1)
         x1 = blockify(x1, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
         x2 = blockify(x2, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
 
