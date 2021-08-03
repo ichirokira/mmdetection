@@ -341,8 +341,9 @@ class MlpMixer(nn.Module):
     def __init__(self, img_size, hidden_dim=768, tokens_mlp_dim=384, channels_mlp_dim=3072,num_blocks=2,patch_size=16, zero_head=False):
         super(MlpMixer, self).__init__()
         self.zero_head = zero_head
+        n_patches = (img_size // patch_size) * (img_size // patch_size)
         patch_size = _pair(patch_size)
-        n_patches = (img_size//patch_size[0])*(img_size//patch_size[1])
+
         #config.n_patches = n_patches
 
         self.stem = nn.Conv2d(in_channels=3,
