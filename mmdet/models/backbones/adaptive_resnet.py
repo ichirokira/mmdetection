@@ -399,9 +399,10 @@ class LP_Modules(nn.Module):
         """
         B,C, H, W = x1.shape
 
+        self.kernel = self.mlp(x1)
         x1 = blockify(x1, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
         x2 = blockify(x2, size=self.patch_size).permute(0,1,3,4,2) # B, C, K,K, L
-        self.kernel = self.mlp(x1)
+
         out = torch.mul(x2, (1-self.kernel)) + torch.mul(x1, self.kernel)
         out = out.permute(0,1,4,2,3)
         out = deblockify(out, (H, W))
