@@ -3,7 +3,7 @@ model = dict(
     backbone=dict(
         type='AdaptiveResNet',
         depth=101,
-        img_scale=(416, 1344),
+        img_scale=960,
         adaptive_kernel=16,
         hidden_dim=768,
         tokens_mlp_dim=384,
@@ -154,8 +154,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=3,
-    workers_per_gpu=3,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         type='KittiDatasetLP',
         ann_file='train.txt',
@@ -234,13 +234,13 @@ data = dict(
         data_root='../stereo_datasets'))
 evaluation = dict(interval=12, metric='mAP')
 
-optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
 # learning policy
 lr_config = dict(
     policy='step',
     warmup='linear',
-    warmup_iters=500,
+    warmup_iters=2000,
     warmup_ratio=0.001,
     step=[8, 11])
 runner = dict(type='EpochBasedRunner', max_epochs=12)

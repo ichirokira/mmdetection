@@ -3,7 +3,7 @@ model = dict(
     backbone=dict(
         type='AdaptiveResNet',
         depth=101,
-        img_scale=(416, 1344),
+        img_scale=960,
         adaptive_kernel=16,
         hidden_dim=768,
         tokens_mlp_dim=384,
@@ -154,8 +154,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=3,
-    workers_per_gpu=3,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         type='KittiDatasetLP',
         ann_file='val.txt',
